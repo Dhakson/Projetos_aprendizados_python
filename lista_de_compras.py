@@ -26,7 +26,7 @@ itens = 0
 # Exibe um cabeçalho para a nota fiscal
 print('=' * 60)
 print('{:>30}'.format('NOTA FISCAL'))
-print("{:<20} {:<10} {:<15}".format("Produto", "Quantidade", "Valor total"))
+print("{:<20} {:<10} {:<15} {:<15}".format("Produto", "Quantidade","Valor Unit", "Valor total"))
 
 # Loop para listar os produtos, suas quantidades e valores totais
 for i, compra in enumerate(compras, 1):
@@ -35,13 +35,14 @@ for i, compra in enumerate(compras, 1):
     nome_produto = compra["Produto"]
     qntd_prodouto = compra["Quantidade"]
     total_compra = (f'R${total_itens:7.2f}')
+    unit = compra["Preco"]
     total += total_itens
     itens += qntd_prodouto
     # Exibe os detalhes da compra na nota fiscal
-    print("{:<20} {:<10} {:<15} ".format(nome_produto, qntd_prodouto, total_compra))
+    print("{:<20} {:<10} {:<15} {:<15} ".format(nome_produto, qntd_prodouto,unit, total_compra))
 
-print('{:<20}'.format("TOTAL DE ITENS ADICIONADO:"))
-print('{:<20}'.format(itens))
+print('{:^50}'.format("Qntd_Total"))
+print('{:^45}'.format(itens))
 # Exibe o valor total das compras
 print('='*60)
 print('{:>15}'.format('TOTAL'))
@@ -53,16 +54,20 @@ print('''FORMA DE PAGAMENTO:
     [3] - CARTÃO DE CRÉDITO ATÉ 2X
     [4] - CARTÃO DE CREDITO 3X MAIS COM 20% DE ACRESCIMO
     [5] - SAIR  ''')
-opcao = int(input('Escolha a Opção: '))
-if opcao != 5:
+opcao = 0
+while opcao != 5:
+    opcao = int(input('Escolha um Opção: '))
     if opcao == 1:
         desconto = total - (total * 10 / 100)
         print(desconto)
+        break
     elif opcao == 2:
         desconto = total - (total * 5 / 100)
         print(desconto)
+        break
     elif opcao == 3:
         print('Não tem Desconto e Nem acrescimo')
+        break
     elif opcao == 4:
         parcelas = int(input('Parcelas: '))
         if parcelas >= 3:
@@ -70,7 +75,9 @@ if opcao != 5:
             total_par = desconto / parcelas 
             print(f'R${desconto:7.2f}')
             print(f'Parcelas {parcelas} de R${total_par:.2f}')
-    elif opcao == 5:
-        print( )
-
-print('VOLTE SEMPRE!')
+            break
+    else:
+        if opcao == 5:
+            print('Finalizando...')
+        elif opcao != 5:
+            print('Tente Novamente ')
