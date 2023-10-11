@@ -59,11 +59,11 @@ while opcao != 5:
     opcao = int(input('Escolha um Opção: '))
     if opcao == 1:
         desconto = total - (total * 10 / 100)
-        print(desconto)
+        print(f'Total com desconto de 10% R${desconto:7.2f}')
         break
     elif opcao == 2:
         desconto = total - (total * 5 / 100)
-        print(desconto)
+        print(f'Total com desconto de 5% R${desconto:7.2f}')
         break
     elif opcao == 3:
         print('Não tem Desconto e Nem acrescimo')
@@ -71,9 +71,9 @@ while opcao != 5:
     elif opcao == 4:
         parcelas = int(input('Parcelas: '))
         if parcelas >= 3:
-            desconto = total + (total * 20/ 100)
-            total_par = desconto / parcelas 
-            print(f'R${desconto:7.2f}')
+            acrescimo = total + (total * 20/ 100)
+            total_par = acrescimo/ parcelas 
+            print(f'R${acrescimo:7.2f}')
             print(f'Parcelas {parcelas} de R${total_par:.2f}')
             break
     else:
